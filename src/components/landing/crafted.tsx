@@ -26,7 +26,7 @@ export default function Crafted() {
          authentic, Natural goodness
         </h2>
         <a
-          className="mt-[28px] inline-flex min-h-[46px] items-center bg-[#9D7474] px-[28px] font-sans text-[15px] font-medium text-white transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:mt-[200px] sm:min-h-[52px]"
+          className="mt-[28px] inline-flex min-h-[46px] rounded-[8px] items-center bg-[#731717] px-[28px] font-sans text-[15px] font-medium text-white transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:mt-[200px] sm:min-h-[52px]"
           href="#products-one"
         >
           Shop Naturals

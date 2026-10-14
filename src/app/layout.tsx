@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Jost, Kumbh_Sans } from "next/font/google";
+import { Jost, Kumbh_Sans, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 const jost = Jost({
   variable: "--font-jost",
@@ -23,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${jost.variable} ${kumbhSans.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", jost.variable, kumbhSans.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full font-sans">{children}</body>
     </html>

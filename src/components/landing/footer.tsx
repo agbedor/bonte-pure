@@ -48,7 +48,7 @@ const products = [
 export default function Footer() {
   return (
     <footer
-      className="relative min-h-[980px] overflow-hidden bg-[#9D7474] px-[24px] py-[48px] text-white sm:min-h-[1000px] sm:px-[48px] sm:py-[64px] md:min-h-[760px] md:py-[96px] lg:px-[64px]"
+      className="relative min-h-[980px] overflow-hidden bg-[#D6D4A0] px-[24px] py-[48px] text-white sm:min-h-[1000px] sm:px-[48px] sm:py-[64px] md:min-h-[760px] md:py-[96px] lg:px-[64px]"
       id="footer"
     >
       <div className="relative z-40 grid grid-cols-2 gap-x-[32px] gap-y-[44px] sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-[56px]">

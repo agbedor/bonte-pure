@@ -164,12 +164,7 @@ export default function Accessories() {
           >
             Accessories
           </h2>
-          <a
-            className="font-display text-[13px] tracking-[0.04em] text-white/80 transition-colors hover:text-white"
-            href="#accessory-index"
-          >
-            Index
-          </a>
+
         </div>
 
         <nav aria-label="Accessories collection" className="my-[48px]" id="accessory-index">

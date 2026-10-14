@@ -4,7 +4,7 @@ export default function GrownInGhana() {
   return (
     <section
       aria-labelledby="grown-in-ghana-title"
-      className="relative isolate flex h-[800px] items-center overflow-hidden bg-[#3F2D2D] px-[24px] py-[64px] text-[#E8DEB0] sm:h-auto sm:min-h-screen sm:px-[48px]"
+      className="relative isolate flex h-[800px] items-center overflow-hidden bg-[#731717] px-[24px] py-[64px] text-[#E8DEB0] sm:h-auto sm:min-h-screen sm:px-[48px]"
       id="grown-in-ghana"
     >
       <div
@@ -15,7 +15,7 @@ export default function GrownInGhana() {
       <div className="relative mx-auto h-[720px] w-full max-w-none sm:h-[900px] lg:h-[1000px]">
         <Image
           alt="Bonte Pure shea butter in a decorated cream jar"
-          className="absolute left-1/2 top-[300px] z-10 h-[300px] w-auto max-w-none -translate-x-1/2 object-contain sm:top-[220px] sm:h-[500px] lg:top-[300px] lg:h-[600px]"
+          className="absolute left-1/2 top-[300px] z-10 h-[300px] w-auto max-w-none -translate-x-1/2 animate-[spin_20s_linear_infinite] object-contain motion-reduce:animate-none sm:top-[220px] sm:h-[500px] lg:top-[300px] lg:h-[600px]"
           height={900}
           priority={false}
           src="/landing/grown-in-ghana/shea-product.png"

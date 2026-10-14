@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import ScrollRevealGroup from "@/components/ui/ScrollRevealGroup";
+
 export default function Stories() {
   return (
     <section
@@ -7,8 +9,9 @@ export default function Stories() {
       className="bg-white px-[24px] py-[72px] text-[#1F1F1F] sm:px-[48px] sm:py-[96px] lg:px-[64px]"
       id="stories"
     >
-      <div className="mx-auto">
+      <ScrollRevealGroup className="mx-auto">
         <h2
+          data-scroll-reveal
           className="font-sans text-[36px] font-semibold leading-[1.08] tracking-[-0.02em] sm:text-[48px]"
           id="stories-title"
         >
@@ -17,7 +20,10 @@ export default function Stories() {
         </h2>
 
         <div className="mt-[64px] flex justify-center gap-[12px] sm:mt-[96px] sm:gap-[16px]">
-          <div className="relative h-[280px] w-[calc(50%-6px)] max-w-[300px] overflow-hidden rounded-[16px] sm:h-[400px] sm:w-[270px]">
+          <div
+            data-scroll-reveal
+            className="relative h-[280px] w-[calc(50%-6px)] max-w-[300px] overflow-hidden rounded-[16px] sm:h-[400px] sm:w-[270px]"
+          >
             <Image
               alt="A green hillside in Ghana"
               className="object-cover"
@@ -26,7 +32,10 @@ export default function Stories() {
               src="/landing/stories/ghana-landscape.png"
             />
           </div>
-          <div className="relative h-[280px] w-[calc(50%-6px)] max-w-[300px] overflow-hidden rounded-[16px] sm:h-[400px] sm:w-[270px]">
+          <div
+            data-scroll-reveal
+            className="relative h-[280px] w-[calc(50%-6px)] max-w-[300px] overflow-hidden rounded-[16px] sm:h-[400px] sm:w-[270px]"
+          >
             <Image
               alt="Ghanaian farmers sharing freshly harvested cocoa pods"
               className="object-cover"
@@ -37,7 +46,10 @@ export default function Stories() {
           </div>
         </div>
 
-        <div className="mt-[24px] grid gap-[24px] border-t border-[#E7E5E2] pt-[24px] text-[#696969] md:grid-cols-[1fr_2.2fr_1fr] md:gap-[32px]">
+        <div
+          data-scroll-reveal
+          className="mt-[24px] grid gap-[24px] border-t border-[#E7E5E2] pt-[24px] text-[#696969] md:grid-cols-[1fr_2.2fr_1fr] md:gap-[32px]"
+        >
           <p className="font-display text-[13px]">Our Heritage</p>
           <div className="font-display text-[15px] leading-[1.95] sm:text-[16px]">
             <p>
@@ -58,7 +70,7 @@ export default function Stories() {
             Read Our Story
           </a>
         </div>
-      </div>
+      </ScrollRevealGroup>
     </section>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const rituals = [
   {
@@ -22,13 +22,52 @@ const rituals = [
     name: "Coconut Oil",
     image: "/landing/more-than-nature/ethical-harvest.webp",
     imageAlt: "Ethically harvested ingredients in Ghana",
-    product: "/products/bonte-coconut-oil.webp",
+    product: "/products/bonte-coconut-oil.png",
+    productAlt: "Bonte Pure coconut oil",
+  },
+    {
+    name: "Woven Bags",
+    image: "/landing/hero/cowries.png",
+    imageAlt: "A Ghanaian woven bag in warm sunlight",
+    product: "/products/bonte-black-soap.png",
+    productAlt: "Bonte Pure cocoa butter",
+  },
+  {
+    name: "Black Soap",
+    image: "/landing/hero/hero-2.jpg",
+    imageAlt: "Ethically harvested ingredients in Ghana",
+    product: "/products/bonte-cocoa-butter.webp",
     productAlt: "Bonte Pure coconut oil",
   },
 ];
 
 export default function Ritual() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  function updateScrollState() {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    setCanScrollLeft(track.scrollLeft > 1);
+    setCanScrollRight(track.scrollLeft < maxScrollLeft - 1);
+  }
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    updateScrollState();
+    track.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+
+    return () => {
+      track.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, []);
 
   function scrollCards(direction: -1 | 1) {
     const track = trackRef.current;
@@ -45,7 +84,7 @@ export default function Ritual() {
   return (
     <section
       aria-labelledby="ritual-title"
-      className="overflow-hidden bg-[#3F2D2D] px-[24px] py-[64px] text-white sm:px-[48px] sm:py-[80px] lg:flex lg:h-[1000px] lg:items-center lg:px-0 lg:py-[64px] lg:pl-[64px]"
+      className="overflow-hidden bg-[#731717] px-[24px] py-[64px] text-white sm:px-[48px] sm:py-[80px] lg:flex lg:h-[1000px] lg:items-center lg:px-0 lg:py-[64px] lg:pl-[64px]"
       id="ritual"
     >
       <div className="mx-auto flex h-full w-full flex-col gap-[40px] lg:flex-row lg:items-center lg:gap-[48px]">
@@ -60,7 +99,8 @@ export default function Ritual() {
             <div className="mt-[36px] flex gap-[16px] lg:mt-[140px]">
               <button
                 aria-label="Scroll to previous ritual"
-                className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] bg-white/55 text-[#351A19] transition-colors hover:bg-white/75 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] bg-white text-[#351A19] transition-colors hover:bg-white/75 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white"
+                disabled={!canScrollLeft}
                 onClick={() => scrollCards(-1)}
                 type="button"
               >
@@ -68,7 +108,8 @@ export default function Ritual() {
               </button>
               <button
                 aria-label="Scroll to next ritual"
-                className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] bg-white text-[#202020] transition-colors hover:bg-[#F0E9E5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] bg-white text-[#202020] transition-colors hover:bg-[#F0E9E5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white"
+                disabled={!canScrollRight}
                 onClick={() => scrollCards(1)}
                 type="button"
               >
@@ -83,7 +124,7 @@ export default function Ritual() {
               essentials made with Ghanaian ingredients and care.
             </p>
             <a
-              className="mt-[36px] inline-flex min-h-[56px] items-center rounded-[10px] bg-white px-[32px] font-sans text-[16px] font-medium tracking-[0.025em] text-[#202020] transition-colors hover:bg-[#F0E9E5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="mt-[36px] inline-flex min-h-[56px] items-center rounded-[8px] bg-white px-[32px] font-sans text-[16px] font-medium tracking-[0.025em] text-[#202020] transition-colors hover:bg-[#F0E9E5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               href="#products-one"
             >
               Explore Our Products
@@ -93,7 +134,7 @@ export default function Ritual() {
 
         <div
           aria-label="Products in the ritual"
-          className="flex min-w-0 snap-x snap-mandatory gap-[16px] overflow-x-auto scroll-smooth pb-[4px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:h-[692px] lg:flex-1"
+          className="flex min-w-0 snap-x snap-mandatory gap-[16px] overflow-x-auto scroll-smooth pb-[4px] pr-[24px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:pr-[48px] lg:h-[692px] lg:flex-1 lg:pr-[64px]"
           ref={trackRef}
           role="region"
         >
@@ -111,7 +152,7 @@ export default function Ritual() {
                 src={ritual.image}
               />
               <div aria-hidden="true" className="absolute inset-0 bg-black/10" />
-              <div className="absolute bottom-[24px] left-[24px] flex h-[84px] w-[80px] items-center justify-center overflow-hidden rounded-[13px] bg-[#3F2D2D] p-[9px] shadow-lg sm:bottom-[26px] sm:left-[26px]">
+              <div className="absolute bottom-[24px] left-[24px] flex h-[84px] w-[80px] items-center justify-center overflow-hidden rounded-[13px] bg-[#731717] p-[9px] shadow-lg sm:bottom-[26px] sm:left-[26px]">
                 <Image
                   alt={ritual.productAlt}
                   className="object-contain p-[10px]"

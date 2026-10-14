@@ -5,29 +5,37 @@ const products = [
     name: "Black Soap",
     detail: "Samina Tuntum",
     size: "500g",
-    image: "/products/bonte-black-soap.webp",
+    image: "/products/bonte-black-soap.png",
+    backImage: "/products/bonte-black-soap-back.png",
     alt: "Bonte Pure Samina Tuntum black soap box",
+    price: "GHS 100.00",
   },
   {
     name: "Coconut Oil",
     detail: "Pure Coconut",
     size: "250g",
-    image: "/products/bonte-coconut-oil.webp",
+    image: "/products/bonte-coconut-oil.png",
+    backImage: "/products/bonte-coconut-oil-back.png",
     alt: "Bonte Pure coconut oil jar",
+    price: "GHS 200.00",
   },
   {
     name: "Shea Butter",
     detail: "Northern",
-    size: "250g",
+    size: "120g",
     image: "/products/bonte-shea-butter.webp",
+    backImage: "/products/bonte-shea-butter-back.png",
     alt: "Bonte Pure Northern shea butter jar",
+    price: "GHS 130.00",
   },
   {
     name: "Cocoa Butter",
     detail: "Akan",
     size: "250g",
     image: "/products/bonte-cocoa-butter.webp",
+    backImage: "/products/bonte-cocoa-butter-back.png",
     alt: "Bonte Pure Akan cocoa butter package",
+    price: "GHS 157.00",
   },
 ];
 
@@ -65,14 +73,14 @@ export default function ProductsOne() {
         >
           {products.map((product) => (
             <article
-              className="relative flex h-[560px] w-[min(78vw,420px)] shrink-0 snap-start flex-col items-center rounded-[24px] bg-[#3F2D2D] px-[14px] pb-[30px] pt-[16px] text-white md:h-auto md:min-h-[560px] md:w-auto md:shrink md:snap-none"
+              className="group relative flex h-[560px] w-[min(78vw,420px)] shrink-0 snap-start flex-col items-center rounded-[24px] bg-[#731717] px-[14px] pb-[30px] pt-[16px] text-white md:h-auto md:min-h-[560px] md:w-auto md:shrink md:snap-none"
               key={product.name}
             >
               <span className="absolute left-[14px] top-[14px] rounded-full border border-white px-[17px] py-[6px] font-display text-[15px] leading-[1]">
                 {product.size}
               </span>
 
-              <div className="mb-[24px] mt-[76px] text-center">
+              <div className="mb-[24px] mt-[50px] text-center">
                 <h3 className="font-sans text-[25px] font-medium leading-[1.15] sm:text-[28px]">
                   {product.name}
                 </h3>
@@ -81,22 +89,33 @@ export default function ProductsOne() {
                 </p>
               </div>
 
-              <div className="relative h-[270px] w-full overflow-hidden rounded-[22px] bg-[#9D7474]">
+              <div className="relative h-[270px] w-full overflow-hidden rounded-[22px] bg-[#874242]">
                 <Image
                   alt={product.alt}
-                  className="object-contain p-[14px]"
+                  className="object-contain p-[14px] transition-opacity duration-300 group-hover:opacity-0 group-focus-within:opacity-0"
                   fill
                   sizes="(max-width: 767px) 78vw, (max-width: 1279px) 50vw, 25vw"
                   src={product.image}
                 />
+                <Image
+                  alt=""
+                  aria-hidden="true"
+                  className="object-contain p-[14px] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
+                  fill
+                  sizes="(max-width: 767px) 78vw, (max-width: 1279px) 50vw, 25vw"
+                  src={product.backImage}
+                />
               </div>
 
               <button
-                className="mt-[24px] rounded-[14px] bg-[#9D7474] px-[20px] py-[12px] font-display text-[16px] tracking-[0.025em] transition-colors hover:bg-[#9A5B58] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                className="mt-[24px] rounded-[14px] bg-[#874242] px-[20px] py-[12px] font-display text-[16px] tracking-[0.025em] transition-colors hover:bg-[#9A5B58] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 type="button"
               >
                 Add Basket
               </button>
+              <p className="mt-[20px] font-display text-[15px] leading-[1.2] sm:text-[18px]">
+                {product.price}
+              </p>
             </article>
           ))}
         </div>

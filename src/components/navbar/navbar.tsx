@@ -18,6 +18,7 @@ export default function Navbar() {
       <Link
         aria-label="Bonte Pure home"
         className="relative block h-[66px] w-[118px] shrink-0 sm:h-[78px] sm:w-[140px] xl:h-[92px] xl:w-[164px]"
+        data-hero-reveal
         href="/"
         onClick={() => setMenuOpen(false)}
       >
@@ -35,6 +36,7 @@ export default function Navbar() {
         aria-expanded={menuOpen}
         aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
         className="mt-2 inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-[#111827] shadow-lg xl:hidden"
+        data-hero-reveal
         onClick={() => setMenuOpen((open) => !open)}
         type="button"
       >
@@ -46,6 +48,7 @@ export default function Navbar() {
         className={`${
           menuOpen ? "flex" : "hidden"
         } absolute right-[24px] top-full z-30 mt-[12px] w-[min(280px,calc(100vw-48px))] flex-col rounded-[24px] bg-white px-[20px] py-[8px] font-sans text-[#111827] shadow-xl sm:right-[48px] xl:static xl:mt-0 xl:flex xl:min-h-[30px] xl:w-[560px] xl:min-w-0 xl:flex-row xl:items-center xl:justify-between xl:gap-[24px] xl:rounded-[24px] xl:px-[28px] xl:py-[10px] xl:shadow-none`}
+        data-hero-reveal
         id="primary-navigation"
       >
         <Link
