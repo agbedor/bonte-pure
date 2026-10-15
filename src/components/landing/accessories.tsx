@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CURTAIN_COLUMNS = 12;
 const CURTAIN_STAGGER_MS = 24;
 const CURTAIN_DURATION_MS = 1000;
+const AUTO_SWITCH_MS = 10_000;
 
 const accessories = [
   {
@@ -46,6 +47,9 @@ const accessories = [
 ];
 
 export default function Accessories() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const hoverTimeoutRef = useRef<number | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [pendingIndex, setPendingIndex] = useState<number | null>(null);
   const [curtainOpen, setCurtainOpen] = useState(false);
@@ -68,6 +72,60 @@ export default function Accessories() {
     setCurtainOpen(false);
     setPendingIndex(index);
   }
+
+  function handleHover(index: number) {
+    if (hoverTimeoutRef.current !== null) {
+      window.clearTimeout(hoverTimeoutRef.current);
+    }
+
+    // Ignore fleeting pointer crossings so the curtain doesn't repeatedly restart.
+    hoverTimeoutRef.current = window.setTimeout(() => {
+      selectAccessory(index);
+      hoverTimeoutRef.current = null;
+    }, 80);
+  }
+
+  function selectImmediately(index: number) {
+    if (hoverTimeoutRef.current !== null) {
+      window.clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    selectAccessory(index);
+  }
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.25 },
+    );
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || pendingIndex !== null) return;
+
+    const timeout = window.setTimeout(() => {
+      setCurtainDirection(1);
+      setCurtainOpen(false);
+      setPendingIndex((activeIndex + 1) % accessories.length);
+    }, AUTO_SWITCH_MS);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeIndex, isVisible, pendingIndex]);
+
+  useEffect(
+    () => () => {
+      if (hoverTimeoutRef.current !== null) {
+        window.clearTimeout(hoverTimeoutRef.current);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     if (pendingIndex === null) return;
@@ -103,6 +161,7 @@ export default function Accessories() {
       aria-labelledby="accessories-title"
       className="relative isolate flex min-h-[760px] min-h-screen items-center overflow-hidden bg-[#201A17] text-white"
       id="accessories"
+      ref={sectionRef}
     >
       <Image
         alt={activeAccessory.alt}
@@ -176,9 +235,9 @@ export default function Accessories() {
                   className={`block text-left font-sans text-[38px] leading-[1.12] tracking-[-0.035em] transition-colors duration-300 sm:text-[58px] lg:text-[76px] ${
                     selectedIndex === index ? "text-white" : "text-white/35 hover:text-white/75"
                   }`}
-                  onFocus={() => selectAccessory(index)}
-                  onMouseEnter={() => selectAccessory(index)}
-                  onClick={() => selectAccessory(index)}
+                  onFocus={() => selectImmediately(index)}
+                  onMouseEnter={() => handleHover(index)}
+                  onClick={() => selectImmediately(index)}
                   type="button"
                 >
                   {accessory.name}

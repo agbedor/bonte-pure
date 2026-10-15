@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import gsap from "gsap";
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { LandingIntroContext } from "./landing-intro-context";
 import { heroSlides } from "./hero-slides";
 
@@ -27,22 +27,32 @@ export default function LandingIntro({ children }: { children: ReactNode }) {
   const [active, setActive] = useState(true);
   const loaderRef = useRef<HTMLDivElement>(null);
 
+  useLayoutEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    const scrollToTop = () => window.scrollTo(0, 0);
+
+    window.history.scrollRestoration = "manual";
+    scrollToTop();
+    window.addEventListener("pageshow", scrollToTop);
+
+    return () => {
+      window.removeEventListener("pageshow", scrollToTop);
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
   useEffect(() => {
     const loader = loaderRef.current;
     if (!loader || !active) return;
 
-    const previousScrollRestoration = window.history.scrollRestoration;
-    window.history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const frame = window.requestAnimationFrame(() => {
-        window.history.scrollRestoration = previousScrollRestoration;
         setActive(false);
       });
       return () => {
         window.cancelAnimationFrame(frame);
-        window.history.scrollRestoration = previousScrollRestoration;
       };
     }
 
@@ -71,7 +81,6 @@ export default function LandingIntro({ children }: { children: ReactNode }) {
         paused: true,
         onComplete: () => {
           document.body.style.overflow = previousOverflow;
-          window.history.scrollRestoration = previousScrollRestoration;
           setActive(false);
         },
       });
@@ -164,7 +173,6 @@ export default function LandingIntro({ children }: { children: ReactNode }) {
       if (decodeFallback !== undefined) window.clearTimeout(decodeFallback);
       context.revert();
       document.body.style.overflow = previousOverflow;
-      window.history.scrollRestoration = previousScrollRestoration;
     };
   }, [active]);
 

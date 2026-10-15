@@ -15,9 +15,9 @@ export default function LandingPage() {
       <main>
         <Hero />
         <GrownInGhana />
-        <ProductsOne />
-        <MoreThanNature />
         <Stories />
+        <MoreThanNature />
+        <ProductsOne />
         <Accessories />
         <Ritual />
         <Crafted />
