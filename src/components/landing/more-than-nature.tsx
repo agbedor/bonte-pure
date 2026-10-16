@@ -59,7 +59,7 @@ export default function MoreThanNature() {
         <div className="mt-[96px] grid grid-cols-2 gap-[16px] sm:gap-[20px] lg:mt-[180px] lg:grid-cols-4">
           {values.map((value) => (
             <article
-              className="group relative aspect-[3/4] overflow-hidden rounded-[12px] bg-[#4B2927] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="group relative aspect-[3/4] overflow-hidden rounded-[12px] bg-[#874242] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               key={value.label}
               style={{ perspective: "1000px" }}
               tabIndex={0}
