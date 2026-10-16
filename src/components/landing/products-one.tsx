@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollRevealGroup from "@/components/ui/ScrollRevealGroup";
 
 const products = [
   {
@@ -46,19 +47,21 @@ export default function ProductsOne() {
       className="bg-white px-[24px] py-[96px] text-[#202020] sm:px-[48px] sm:py-[128px] lg:px-[64px]"
       id="products-one"
     >
-      <div className="mx-auto">
+      <ScrollRevealGroup className="mx-auto">
         <div className="mb-[44px] grid items-end gap-[24px] md:mb-[72px] md:grid-cols-[0.85fr_1fr_auto] md:gap-[48px]">
           <h2
+            data-scroll-reveal
             className="max-w-[420px] font-sans text-[42px] font-semibold leading-[0.98] tracking-[-0.035em] sm:text-[68px]"
             id="products-one-title"
           >
             Our Finest Naturals
           </h2>
-          <p className="max-w-[640px] pb-[6px] font-display text-[16px] leading-[1.45] tracking-[0.035em] text-[#6F6D6B] sm:text-[19px]">
+          <p data-scroll-reveal className="max-w-[640px] pb-[6px] font-display text-[16px] leading-[1.45] tracking-[0.035em] text-[#6F6D6B] sm:text-[19px]">
             From nourishing butters to everyday essentials, explore our natural
             collection made with care in Ghana.
           </p>
           <a
+            data-scroll-reveal
             className="w-fit border-b border-[#202020] pb-[5px] font-sans text-[18px] tracking-[0.035em] transition-opacity hover:opacity-60"
             href="#products-one"
           >
@@ -73,6 +76,7 @@ export default function ProductsOne() {
         >
           {products.map((product) => (
             <article
+              data-scroll-reveal
               className="group relative flex h-[560px] w-[min(78vw,420px)] shrink-0 snap-start flex-col items-center rounded-[24px] bg-[#731717] px-[14px] pb-[30px] pt-[16px] text-white md:h-auto md:min-h-[560px] md:w-auto md:shrink md:snap-none"
               key={product.name}
             >
@@ -119,7 +123,7 @@ export default function ProductsOne() {
             </article>
           ))}
         </div>
-      </div>
+      </ScrollRevealGroup>
     </section>
   );
 }
