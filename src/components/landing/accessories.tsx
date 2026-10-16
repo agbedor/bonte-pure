@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const CURTAIN_COLUMNS = 12;
-const CURTAIN_STAGGER_MS = 24;
-const CURTAIN_DURATION_MS = 1000;
-const AUTO_SWITCH_MS = 10_000;
+const CURTAIN_STAGGER_MS = 0;
+const CURTAIN_DURATION_MS = 500;
+const AUTO_SWITCH_MS = 5_000;
 
 const accessories = [
   {
